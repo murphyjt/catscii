@@ -28,7 +28,9 @@ async fn main() {
         ..Default::default()
     }));
 
-    let app = Router::new().route("/", get(root_get));
+    let app = Router::new()
+    .route("/", get(root_get))
+    .route("/panic", get(|| async { panic!("This is a test panic") }));
 
     let addr = "0.0.0.0:8080".parse().unwrap();
     info!("Listening on {addr}");
